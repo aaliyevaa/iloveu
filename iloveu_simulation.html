@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILOVEYOU Virus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #e0f7fa; /* Soft base color */
+            padding: 50px;
+            color: #333;
+            transition: background-color 0.5s ease;
+        }
+        #loading {
+            font-size: 22px;
+            margin: 20px;
+        }
+        #infected {
+            display: none;
+            font-weight: bold;
+            color: red;
+            font-size: 28px;
+            margin-top: 20px;
+        }
+        #messages {
+            display: none;
+            font-size: 18px;
+            color: green;
+            margin-top: 20px;
+        }
+        #virusImage {
+            display: none;
+            width: 150px;
+            margin: 20px auto;
+        }
+        #instructions {
+            margin-top: 30px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+    <script>
+        function changeBackground() {
+            const colors = ['#e3f2fd', '#bbdefb', '#b2ebf2', '#c8e6c9', '#f0f4c3', '#fff9c4']; // Softer colors
+            document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function simulateInfection() {
+            document.getElementById("loading").innerHTML = "Initializing...";
+            setTimeout(() => {
+                document.getElementById("loading").innerHTML = "Spreading to contacts...";
+                changeBackground(); // Change background color
+                setTimeout(() => {
+                    displayMessages();
+                }, 2000);
+            }, 2000);
+        }
+
+        function displayMessages() {
+            const messages = [
+                "Infecting your system...",
+                "Accessing files...",
+                "Copying sensitive information...",
+                "Sending copies to all contacts..."
+            ];
+            const messagesDiv = document.getElementById("messages");
+            messagesDiv.style.display = "block";
+
+            messages.forEach((msg, index) => {
+                setTimeout(() => {
+                    const messageElement = document.createElement("div");
+                    messageElement.textContent = msg;
+                    messagesDiv.appendChild(messageElement);
+                    changeBackground(); // Change background color with each message
+                    if (index === messages.length - 1) {
+                        setTimeout(() => {
+                            showFinalMessage();
+                        }, 2000);
+                    }
+                }, index * 2000);
+            });
+
+            document.getElementById("virusImage").style.display = "block";
+        }
+
+        function showFinalMessage() {
+            document.getElementById("loading").innerHTML = "Simulation complete.";
+            document.getElementById("infected").style.display = "block";
+        }
+
+        window.onload = function() {
+            simulateInfection();
+        };
+    </script>
+</head>
+<body>
+    <h1>ILOVEYOU Virus</h1>
+    <div id="loading">Preparing to simulate...</div>
+    <img id="virusImage" src="iloveuimage.png" alt="Virus Icon">
+    <div id="infected" class="infected">Your device has been "infected"! But don't worry, it's just a simulation!</div>
+    <div id="messages"></div>
+    <div id="instructions">Watch how the virus spreads!</div>
+</body>
+</html>
